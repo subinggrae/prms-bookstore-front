@@ -1,10 +1,10 @@
-import styled from "styled-components";
-import InputText from "../components/commons/InputText";
-import Button from "../components/commons/Button";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { signup } from "../api/auth.api";
+import Button from "../components/commons/Button";
+import InputText from "../components/commons/InputText";
+import Title from "../components/commons/Title";
 import { useAlert } from "../hooks/useAlert";
 
 export interface SignupProps {
@@ -38,6 +38,7 @@ function Signup() {
 
   return (
     <>
+      <Title size="large">회원가입</Title>
       <SignupStyle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <fieldset>
@@ -70,7 +71,7 @@ function Signup() {
   );
 }
 
-const SignupStyle = styled.div`
+export const SignupStyle = styled.div`
   max-width: ${({ theme }) => theme.layout.width.small};
   margin: 80px auto;
 

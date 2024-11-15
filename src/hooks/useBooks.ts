@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Book } from "../models/book.model";
-import { IPagination } from "../models/pagination.model";
+import { Pagination } from "../models/pagination.model";
 import { fetchBooks } from "../api/books.api";
 import { QUERYSTRING } from "../constants/querystring";
 import { LIMIT } from "../constants/pagination";
@@ -10,7 +10,7 @@ export const useBooks = () => {
   const location = useLocation();
 
   const [books, setBooks] = useState<Book[]>([]);
-  const [pagination, setPagination] = useState<IPagination>({
+  const [pagination, setPagination] = useState<Pagination>({
     totalCount: 0,
     currentPage: 1,
   });

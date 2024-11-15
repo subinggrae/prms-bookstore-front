@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { IPagination } from "../../models/pagination.model";
+import { Pagination as IPagination} from "../../models/pagination.model";
 import { LIMIT } from "../../constants/pagination";
 import Button from "../commons/Button";
 import { useSearchParams } from "react-router-dom";

@@ -10,7 +10,7 @@ import { useAlert } from "../hooks/useAlert";
 
 function ResetPassword() {
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
   const [resetRequested, setResetRequested] = useState(false);
 
   const {
@@ -24,7 +24,7 @@ function ResetPassword() {
       resetPassword(data).then(() => {
         showAlert("비밀번호가 초기화되었습니다.");
         navigate("/login");
-      })
+      });
     } else {
       resetRequest(data).then(() => {
         setResetRequested(true);

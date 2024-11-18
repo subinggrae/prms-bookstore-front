@@ -32,6 +32,10 @@ export const useBooks = () => {
       setBooks(books);
       setPagination(pagination);
       setIsEmpty(books.length === 0);
+    }).catch((err) => {
+      if(err.response.status === 404) {
+        setIsEmpty(true);
+      }
     });
   }, [location.search]);
 

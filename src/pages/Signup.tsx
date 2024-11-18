@@ -21,7 +21,7 @@ function Signup() {
   //   console.log(email, password);
   // }
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
 
   const {
     register,
@@ -33,8 +33,8 @@ function Signup() {
     signup(data).then((res) => {
       showAlert("회원가입이 완료되었습니다.");
       navigate("/login");
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -47,7 +47,9 @@ function Signup() {
               type="email"
               {...register("email", { required: true })}
             />
-            {errors.email && <p className="error-text">이메일을 입력해주세요.</p>}
+            {errors.email && (
+              <p className="error-text">이메일을 입력해주세요.</p>
+            )}
           </fieldset>
           <fieldset>
             <InputText
@@ -55,7 +57,9 @@ function Signup() {
               type="password"
               {...register("password", { required: true })}
             />
-            {errors.password && <p className="error-text">비밀번호를 입력해주세요.</p>}
+            {errors.password && (
+              <p className="error-text">비밀번호를 입력해주세요.</p>
+            )}
           </fieldset>
           <fieldset>
             <Button size="medium" scheme="primary">

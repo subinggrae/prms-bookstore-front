@@ -1,31 +1,34 @@
 import styled from "styled-components";
-import Title from "../components/commons/Title";
-import BooksViewSwitcher from "../components/books/BooksViewSwitcher";
 import BooksEmpty from "../components/books/BooksEmpty";
-import Pagination from "../components/books/Pagination";
-import BooksList from "../components/books/BooksList";
 import BooksFilter from "../components/books/BooksFilter";
+import BooksList from "../components/books/BooksList";
+import BooksViewSwitcher from "../components/books/BooksViewSwitcher";
+import Pagination from "../components/books/Pagination";
+import Title from "../components/commons/Title";
 import { useBooks } from "../hooks/useBooks";
+import Loading from "@/components/commons/Loading";
 
 function Books() {
-  const { books, pagination, isEmpty } = useBooks();
+  const { books, pagination, isEmpty, isBooksLoading } = useBooks();
+
+  if (isEmpty) {
+    return <BooksEmpty />;
+  }
+
+  if (!books || !pagination || isBooksLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <Title size="large">도서 검색 결과</Title>
       <BooksStyle>
         <div className="filter">
-        <BooksFilter />
-        <BooksViewSwitcher />
+          <BooksFilter />
+          <BooksViewSwitcher />
         </div>
-        {isEmpty ? (
-          <BooksEmpty />
-        ) : (
-          <>
-            <BooksList books={books} />
-            <Pagination pagination={pagination} />
-          </>
-        )}
+        <BooksList books={books} />
+        <Pagination pagination={pagination} />
       </BooksStyle>
     </>
   );

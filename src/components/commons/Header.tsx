@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
-import { FaSignInAlt, FaRegUser } from "react-icons/fa";
+import { FaSignInAlt, FaRegUser, FaUserCircle } from "react-icons/fa";
 import { useCategory } from "../../hooks/useCategory";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../store/authStore";
+import DropDown from "./DropDown";
 
 function Header() {
   const category = useCategory();
@@ -34,34 +35,38 @@ function Header() {
         </ul>
       </nav>
       <nav className="auth">
-        {isLoggedIn ? (
-          <>
+        <DropDown toggleButton={<FaUserCircle />}>
+          {isLoggedIn ? (
+            <>
+              <ul>
+                <li>
+                  <Link to="/cart">장바구니</Link>
+                </li>
+                <li>
+                  <Link to="/orderlist">주문내역</Link>
+                </li>
+                <li>
+                  <button onClick={storeLogout}>로그아웃</button>
+                </li>
+              </ul>
+            </>
+          ) : (
             <ul>
               <li>
-                <Link to="/cart">장바구니</Link>
+                <Link to="/login">
+                  <FaSignInAlt />
+                  로그인
+                </Link>
               </li>
               <li>
-                <Link to="/orderlist">주문내역</Link>
+                <Link to="/signup">
+                  <FaRegUser />
+                  회원가입
+                </Link>
               </li>
-              <li><button onClick={storeLogout}>로그아웃</button></li>
             </ul>
-          </>
-        ) : (
-          <ul>
-            <li>
-              <Link to="/login">
-                <FaSignInAlt />
-                로그인
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup">
-                <FaRegUser />
-                회원가입
-              </Link>
-            </li>
-          </ul>
-        )}
+          )}
+        </DropDown>
       </nav>
     </HeaderStyle>
   );
@@ -105,14 +110,19 @@ const HeaderStyle = styled.header`
   .auth {
     ul {
       display: flex;
+      flex-direction: column;
+      width: 100px;
       gap: 16px;
       li {
-        a, button {
+        a,
+        button {
           font-size: 1rem;
           font-weight: 600;
           text-decoration: none;
           display: flex;
+          justify-content: center;
           align-items: center;
+          width: 100%;
           line-height: 1;
           background: none;
           border: 0;

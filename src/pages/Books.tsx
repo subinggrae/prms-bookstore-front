@@ -7,9 +7,31 @@ import Pagination from "../components/books/Pagination";
 import Title from "../components/commons/Title";
 import { useBooks } from "../hooks/useBooks";
 import Loading from "@/components/commons/Loading";
+import { useBooksInfinite } from "@/hooks/useBooksInfinite";
+import Button from "@/components/commons/Button";
+import { useEffect, useRef } from "react";
+import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 
 function Books() {
-  const { books, pagination, isEmpty, isBooksLoading } = useBooks();
+  const {
+    books,
+    pagination,
+    isEmpty,
+    isBooksLoading,
+    hasNextPage,
+    fetchNextPage,
+  } = useBooksInfinite();
+  
+  const moreRef = useIntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      loadMore();
+    }
+  });
+
+  const loadMore = () => {
+    if (!hasNextPage) return;
+    fetchNextPage();
+  };
 
   if (isEmpty) {
     return <BooksEmpty />;
@@ -28,7 +50,8 @@ function Books() {
           <BooksViewSwitcher />
         </div>
         <BooksList books={books} />
-        <Pagination pagination={pagination} />
+        {/* <Pagination pagination={pagination} /> */}
+        <div className="more" ref={moreRef}></div>
       </BooksStyle>
     </>
   );

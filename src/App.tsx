@@ -1,25 +1,24 @@
-import ThemeSwitcher from "./components/header/ThemeSwitcher";
+import { QueryClientProvider } from "react-query";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { queryClient } from "./api/queryClient";
+import Error from "./components/commons/Error";
+import ToastContainer from "./components/commons/toast/ToastContainer";
 import Layout from "./components/layout/Layout";
 import { BookStoreThemeProvider } from "./context/ThemeContext";
-import Home from "./pages/Home";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Error from "./components/commons/Error";
-import Signup from "./pages/Signup";
-import ResetPassword from "./pages/ResetPassword";
-import Login from "./pages/Login";
-import Books from "./pages/Books";
 import BookDetail from "./pages/BookDetail";
+import Books from "./pages/Books";
 import Cart from "./pages/Cart";
+import Login from "./pages/Login";
+import Main from "./pages/Main";
 import Order from "./pages/Order";
 import OrderList from "./pages/OrderList";
-import { QueryClientProvider } from "react-query";
-import { queryClient } from "./api/queryClient";
-import ToastContainer from "./components/commons/toast/ToastContainer";
+import ResetPassword from "./pages/ResetPassword";
+import Signup from "./pages/Signup";
 
 const routeList = [
   {
     path: "/",
-    element: <Home />,
+    element: <Main />,
     errorElement: <Error />,
   },
   {
